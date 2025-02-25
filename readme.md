@@ -21,8 +21,10 @@ This Shopping Cart microservice should be able to:
 #### **2️⃣ Model Layer (`model/`)**
 - **ActionType.java** → Defines action types (`ADD`, `MODIFY`, `DELETE`).  
 - **Item.java** → Represents an item in the cart.  
-- **OneTimePrice.java / RecurringPrice.java** → Price models for items.  
-- **StatisticsResponse.java** → Defines the structure of statistical data.  
+- **OneTimePrice.java / RecurringPrice.java** → Price models for different price types.  
+- **Price.java** → Price model for items. 
+- **PriceType.java** → PriceType model (`ONE_TIME`, `RECURRING`) . 
+- **StatisticsResponse.java** → Model for statistical data.  
 
 #### **3️⃣ Repository Layer (`repository/`)**
 - **ItemRepository.java** → MongoDB repository for managing cart items.  
@@ -34,7 +36,7 @@ This Shopping Cart microservice should be able to:
 - **ShoppingCartApplication.java** → The main Spring Boot application.  
 
 
-## 🛠 Installation & Running the Project  
+## Installation & Running the Project  
 
 1. Clone the repository:  
 ```bash
@@ -51,18 +53,37 @@ cd shoppingcart2
 ```
 
 
-API Endpoints
+## 📡 API Endpoints
 
-Method	Endpoint	Description
-GET	/carts/{customerId}/items	Get all items in a customer's cart
-POST	/carts/{customerId}/items	Add an item to a cart
-DELETE	/carts/remove	Remove a specific item from a cart
-DELETE	/carts/evict	Evict (clear) a cart
-GET	/carts/fullstatistics	Get full statistics for sold offers
+**Cart Operations**
 
+Get all items in a cart
+```
+GET /carts/{customerId}/items
+```
+Add an item to a cart
+```
+POST /carts/{customerId}/items
+```
+Remove a specific item from a cart
+```
+DELETE /carts/remove?customerId={customerId}&identifier={itemId}
+```
+Evict (clear) a cart
+```
+DELETE /carts/evict
+```
 
-Example Requests
-1️⃣ Get Cart Items
+**Statistics**
+
+Get full statistics for sold offers
+```
+GET /carts/fullstatistics?identifier={identifier}&startDate={YYYY-MM-DDTHH:MM:SS}&endDate={YYYY-MM-DDTHH:MM:SS}
+```
+
+### 📌 Example Requests
+
+**1️⃣ Get Cart Items**
 ```
 GET /carts/12345/items
 ```
@@ -87,7 +108,7 @@ Response:
     "customerId": "customer123"
 }
 ```
-2️⃣ Add an Item to Cart
+**2️⃣ Add an Item to Cart**
 ```
 POST /carts/12345/items
 ```
@@ -112,15 +133,15 @@ POST /carts/12345/items
     "customerId": "customer123"
 }
 ```
-3️⃣ Remove an Item
+**3️⃣ Remove an Item**
 ```
 DELETE /carts/remove?customerId=12345&identifier=item-002
 ```
-4️⃣ Evict a Cart
+**4️⃣ Evict a Cart**
 ```
 DELETE /carts/evict
 ```
-5️⃣ Get Statistics
+**5️⃣ Get Statistics**
 ```
 GET /carts/fullstatistics?identifier=product-001&startDate=2024-01-01T00:00:00&endDate=2024-12-31T23:59:59
 ```
