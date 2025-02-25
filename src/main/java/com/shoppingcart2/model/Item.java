@@ -13,21 +13,20 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-
 @Data
-@Document(collection ="items")
-public class Item {    
+@Document(collection = "items")
+public class Item {
 
     @Id
     private String id;
 
     @Valid
-   
+
     private String identifier;
- 
+
     @NotNull(message = "Action is mandatory")
     private ActionType action;
-    
+
     @NotNull(message = "Prices are mandatory")
     @Size(min = 1, message = "At least one price is required")
     private List<Price> prices;
@@ -39,17 +38,14 @@ public class Item {
 
     private LocalDateTime timestamp;
 
-    
     public Item(String identifier, ActionType action, List<Price> prices, String customerId, LocalDateTime timestamp) {
-       
-        
 
         this.identifier = identifier;
-        this.action = action;         
+        this.action = action;
         this.prices = prices;
         if (customerId.isBlank()) {
             throw new IllegalArgumentException("Customer identifier must be added");
-        } 
+        }
         this.customerId = customerId;
         this.timestamp = timestamp;
     }
@@ -74,7 +70,7 @@ public class Item {
         return this.action;
     }
 
-    public void setAction(ActionType action) {       
+    public void setAction(ActionType action) {
         this.action = action;
     }
 
@@ -100,6 +96,6 @@ public class Item {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
-    }  
+    }
 
 }

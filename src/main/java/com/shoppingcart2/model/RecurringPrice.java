@@ -1,6 +1,5 @@
 package com.shoppingcart2.model;
 
-
 import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotNull;
@@ -14,23 +13,22 @@ public class RecurringPrice extends Price {
 
     @NotNull(message = "Number of recurrences is mandatory.")
     @Positive(message = "Number of recurrences must be positive.")
-    private Integer  numberOfRecurrences;     
+    private Integer numberOfRecurrences;
 
     public RecurringPrice(BigDecimal amount, Integer numberOfRecurrences) {
-        super(amount, PriceType.RECURRING); 
+        super(amount, PriceType.RECURRING);
         if (numberOfRecurrences == null) {
             throw new IllegalArgumentException("Number of recurrences must be provided.");
         }
         if (numberOfRecurrences <= 0) {
             throw new IllegalArgumentException("Number of recurrences must be positive.");
-        }                    
+        }
         this.numberOfRecurrences = numberOfRecurrences;
-        
+
     }
 
     public Integer getNumberOfRecurrences() {
         return this.numberOfRecurrences;
-    }    
+    }
 
-    
 }

@@ -9,12 +9,12 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "type"
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = OneTimePrice.class, name = "ONE_TIME"),    
+    @JsonSubTypes.Type(value = OneTimePrice.class, name = "ONE_TIME"),
     @JsonSubTypes.Type(value = RecurringPrice.class, name = "RECURRING")
 })
 @Data
@@ -22,17 +22,17 @@ abstract class Price {
 
     @Positive(message = "Value must be positive.")
     private BigDecimal amount;
-    
+
     private PriceType type;
 
-    public Price(BigDecimal amount, PriceType type) {      
-       
+    public Price(BigDecimal amount, PriceType type) {
+
         this.amount = amount;
         this.type = type;
     }
 
     public Price() {
-               
+
     }
 
     public BigDecimal getAmount() {
@@ -44,7 +44,7 @@ abstract class Price {
             throw new IllegalArgumentException("Amount must be greater than zero.");
         }
         this.amount = amount;
-    } 
+    }
 
     public PriceType getType() {
         return this.type;
@@ -53,4 +53,4 @@ abstract class Price {
     public void setType(PriceType type) {
         this.type = type;
     }
-}   
+}

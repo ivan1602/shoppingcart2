@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class StatisticsResponse {
+
     @JsonProperty(index = 2)
     private Map<String, Integer> statistics;
     @JsonProperty(index = 3)
@@ -15,10 +16,10 @@ public class StatisticsResponse {
     @JsonProperty(index = 1)
     private Integer numberOfSales;
 
-    public StatisticsResponse(Integer numberOfSales, Map<String,Integer> statistics, String message) {
+    public StatisticsResponse(Integer numberOfSales, Map<String, Integer> statistics, String message) {
         this.numberOfSales = numberOfSales;
         this.statistics = statistics;
-        this.message = message;      
+        this.message = message;
     }
 
     public Integer getNumberOfSales() {
@@ -29,11 +30,11 @@ public class StatisticsResponse {
         this.numberOfSales = numberOfSales;
     }
 
-    public Map<String,Integer> getStatistics() {
+    public Map<String, Integer> getStatistics() {
         return this.statistics;
     }
 
-    public void setStatistics(Map<String,Integer> statistics) {
+    public void setStatistics(Map<String, Integer> statistics) {
         this.statistics = statistics;
     }
 
